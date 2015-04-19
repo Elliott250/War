@@ -1,25 +1,17 @@
 public class War
 {
-	Deck cardDeck;
-	Player player1;
-	Player player2;
 
-	public War()
+	public static boolean determineWar(Card card1, Card card2)
 	{
-		player1 = new Player();
-		player2 = new Player();
-		cardDeck = new Deck("../cardpics");
-		int dealCount = 0;
-	
-		while(!cardDeck.isEmpty())
-		{
-			 if(dealCount % 2 == 0)
-			 	player1.addCard(cardDeck.deal());
-			 else
-			 	player2.addCard(cardDeck.deal());
-		}
-	
+		return card1.equals(card2);
 	}
 
+	public static Card determineWinner(Card card1, Card card2)
+	{
+		if(card1.compareTo(card2) > 0)
+			return card1;
+		else 
+			return card2;
+	}
 
 }

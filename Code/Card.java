@@ -122,6 +122,15 @@ public class Card
 		return false;
 	}
 
+	public int compareTo(Card otherCard)
+	{
+		if( this.getRank() > otherCard.getRank())
+			return 1;
+		else if(this.equals(otherCard))
+			return 0;
+		else 
+			return -1;
+	}
 	/**
 		gets the string representation of a card.
 		@reuturn the string repesentation
