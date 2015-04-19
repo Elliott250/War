@@ -1,21 +1,22 @@
 /**
-Elliott Asher
-2/27/15
-cs 110
-a card class
-Represents a playing card from a 52 card deck
-
-
+*Elliott Asher
+*2/27/15
+*cs 110
+*a card class
+*Represents a playing card from a 52 card deck
 */
+import java.util.*;
+import java.io.*;
 
-public class Card{
+public class Card
+{
 	
 	//Number representation of card suit and ranks
 	final static int SPADES = 1;
 	final static int CLUBS = 2;
 	final static int HEARTS = 3;
 	final static int DIAMONDS = 4;
-	final static int ONE = 1;
+	final static int ACE = 1;
 	final static int TWO = 2;
 	final static int THREE = 3;
 	final static int FOUR = 4;
@@ -28,9 +29,8 @@ public class Card{
 	final static int JACK = 11;
 	final static int QUEEN = 12;
 	final static int KING = 13;
-	final static int ACE = 14;
-	public final int RANK; 
-	public final int SUIT;
+	public int rank; 
+	public int suit;
 	private String imagePath;
 	/**
 		card constructor
@@ -45,20 +45,20 @@ public class Card{
 	{
 		if(isValidRank(rank))
 		{
-			this.RANK = rank;
+			this.rank = rank;
 		}
 		else 
 		{
-			this.RANK = ONE;
+			this.rank = ACE;
 		}
 	
 		if(isValidSuit(suit))
 		{
-			this.SUIT = suit;
+			this.suit = suit;
 		}
 		else
 		{
-			this.SUIT = SPADES;
+			this.suit = SPADES;
 		}
 	}
 
@@ -88,7 +88,7 @@ public class Card{
 	*/
 	public boolean isValidRank(int rank)
 	{
-		if(rank >= ONE || rank <= KING)
+		if(rank >= ACE || rank <= KING)
 			return true;
 		
 		return false;
@@ -99,7 +99,7 @@ public class Card{
 	*/
 	public int getSuit()
 	{
-		return this.SUIT;
+		return this.suit;
 	}
 	/**
 	gets the rank of the card
@@ -107,7 +107,7 @@ public class Card{
 	*/
 	public int getRank()
 	{
-		return this.RANK;
+		return this.rank;
 	}
 	/**
 	determines of another card is equal to this card
@@ -143,7 +143,7 @@ public class Card{
 		//set rank to string
 		switch (this.getRank())
 		{ 
-			 case ONE: rank = "One";break;
+			 case ACE: rank = "ace";break;
 			 case TWO: rank = "Two";break;
 			 case THREE:rank = "Three";break;
 			 case FOUR: rank = "Four";break;
@@ -156,7 +156,6 @@ public class Card{
 			 case JACK: rank = "Jack";break;
 			 case QUEEN: rank = "Queen";break;
 			 case KING: rank = "King";break;
-			 case ACE: rank = "Ace";break;
 		}
 	
 		return String.format("%s of %s",rank,suit); 
@@ -166,4 +165,11 @@ public class Card{
 	{
 		this.imagePath = path;
 	}
+	public String getImagePath()
+	{
+		return this.imagePath;
+	}
+
+			
 }
+
