@@ -6,12 +6,12 @@ public class War
 		return card1.equals(card2);
 	}
 
-	public static Card determineWinner(Card card1, Card card2)
+	public static int determineWinner(Card card1, Card card2)
 	{
 		if(card1.compareTo(card2) > 0)
-			return card1;
+			return -1;
 		else 
-			return card2;
+			return 1;
 	}
 
 }
