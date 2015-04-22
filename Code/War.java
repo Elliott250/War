@@ -1,6 +1,5 @@
 public class War
 {
-
 	public static boolean determineWar(Card card1, Card card2)
 	{
 		return card1.equals(card2);
@@ -13,5 +12,4 @@ public class War
 		else 
 			return 1;
 	}
-
 }

@@ -10,7 +10,6 @@ public class PlayWar
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.pack();
       frame.setVisible(true);
-
    }
 }
 
@@ -49,13 +48,10 @@ class MyFrame extends JFrame
       backOfCard2.addActionListener(new Player2Listener());
       backOfCard2.setFocusable(false);
      
-
       // layout of "this" JFrame
       setLayout(new GridLayout(2,3));
        
       // create individual panels to demonstrate layouts
-      
-
       p1 = new JPanel();
       p1.setLayout(new GridLayout(3,1));
       p1.add(new JLabel("Player 1"));
@@ -95,7 +91,6 @@ class MyFrame extends JFrame
       add(p6);
       addKeyListener(new NewRoundListener()); 
       setFocusable(true);
-
    }
    
    public boolean bothPlayed()
@@ -146,7 +141,7 @@ class MyFrame extends JFrame
   {
     public void actionPerformed(ActionEvent e) 
     {
-    playCard(player1);     
+      playCard(player1);     
     }
   }
 

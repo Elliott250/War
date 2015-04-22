@@ -14,6 +14,7 @@ public class CardPicUtil
 		
 		return listOfCardPics;
 	}
+
 	public static String cardToCardPicFormat(Card card)
 	{
 		
@@ -60,12 +61,5 @@ public class CardPicUtil
 		}
 		
 		return suit;
-	}
-	public static void main(String[] args)
-	{
-		Card ace = new Card(1,1);
-		System.out.println(ace.toString());
-		System.out.println(cardToCardPicFormat(ace));
-
 	}
 }
