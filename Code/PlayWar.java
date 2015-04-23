@@ -19,6 +19,7 @@ class MyFrame extends JFrame
    Player player1;
    Player player2;
    boolean roundWinner = false;
+   boolean war = false;
   
    public MyFrame(String s) 
    {
@@ -56,6 +57,7 @@ class MyFrame extends JFrame
       p1.setLayout(new GridLayout(3,1));
       p1.add(new JLabel("Player 1"));
       p1.add(player1.getWinnerTextLabel());
+      p1.add(player1.getCardsInHandLabel());
       p1.setBackground(Color.GREEN);
 
       p2 = new JPanel();
@@ -71,6 +73,7 @@ class MyFrame extends JFrame
       p4.setLayout(new GridLayout(3,1));
       p4.add(new JLabel("Player 2"));
       p4.add(player2.getWinnerTextLabel());
+      p4.add(player2.getCardsInHandLabel());
       p4.setBackground(Color.GREEN);
 
       p5 = new JPanel();
@@ -97,21 +100,42 @@ class MyFrame extends JFrame
    {
     return (player1.hasLiveCard() && player2.hasLiveCard()); 
    }
+   public void determinWar()
+   {
 
+   }
    public void determineWinner()
    {
-      if(War.determineWinner(player1.lookAtTopLiveCard(),player2.lookAtTopLiveCard()) <  0)
+      this.war = War.determineWar(player1.lookAtTopLiveCard(),player2.lookAtTopLiveCard());
+      if(this.war)
       {
+        player1.playWar();
+        player2.playWar();
+        this.war = false;
+        roundWinner = false;
+      }
+      else if(War.determineWinner(player1.lookAtTopLiveCard(),player2.lookAtTopLiveCard()) <  0)
+      {
+        System.out.println("h1");
         player1.setToWinner();
         player1.takeWinnings(player2);
+
+        player1.setCardsInHand();
+        player2.setCardsInHand();
+        roundWinner = true;
+
       }
       else
       {
+        System.out.println("h2");
+
         player2.setToWinner();
         player2.takeWinnings(player1);
+        player1.setCardsInHand();
+        player2.setCardsInHand();
+        roundWinner = true;
+
       }
-      
-      roundWinner = true;
    }
 
    public void playCard(Player player)
@@ -124,6 +148,7 @@ class MyFrame extends JFrame
   
       if(bothPlayed())
       {
+        System.out.println("hello");
         determineWinner();
       }
   }
@@ -153,21 +178,8 @@ class MyFrame extends JFrame
     }
   }
 
-  class Player1WarListener implements ActionListener
-  {
-    public void actionPerformed(ActionEvent e)
-    {
-
-    }
-  }
-
- class Player2WarListener implements ActionListener
- {
-   public void actionPerformed(ActionEvent e)
-    {
-
-    }
- }
+ 
+ 
  class NewRoundListener implements KeyListener
  {
   

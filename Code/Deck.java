@@ -14,7 +14,7 @@ public class Deck
 		this.shuffle();
 	}
 
-	public Deck(String cardImageDirectory)
+	public Deck(String cardImageDirectory) 
 	{	
 		deck = new ArrayList<Card>();
 		for(int i = Card.ACE; i <= Card.KING; ++i)
@@ -38,10 +38,12 @@ public class Deck
 	{
 		return this.deck;
 	}
+
 	public boolean isEmpty()
 	{
 		return this.deck.isEmpty();
 	}
+
 	public Card deal()
 	{
 		int firstItem = 0;
@@ -50,9 +52,4 @@ public class Deck
 		return firstCard;
 
 	}
-
-
-
-
-
 }

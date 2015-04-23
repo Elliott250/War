@@ -4,13 +4,16 @@ import javax.swing.*;
 
 public class Player
 {
+
 	Queue<Card> hand = new LinkedList<Card>();
-	int cardCount = 0;
 	Stack<Card> liveCards = new Stack<Card>();
 	boolean liveCard;
 	JLabel liveCardImage;
 	JLabel winnerText;
+	JLabel cardsInHand;
 	boolean winner;
+	int cardCount;
+
  
 	public Player()
 	{
@@ -22,6 +25,7 @@ public class Player
 		this.liveCards = new Stack<Card>();
 		this.liveCardImage = new JLabel();
 		this.winnerText = new JLabel();
+		this.cardsInHand = new JLabel();
 	}
 
 	public void setLiveCardImage()
@@ -42,13 +46,12 @@ public class Player
 	*/
 	public boolean addCard(Card card)
 	{
-		++cardCount;
-		return hand.offer(card);
+	System.out.println("added card");
+	return hand.add(card);
 	}
 
 	public Card playCard()
 	{
-		--cardCount;
 		this.liveCard = true;
 		return liveCards.push(hand.remove());
 	}
@@ -81,7 +84,20 @@ public class Player
 	public void setWinnerText(String text)
 	{
 		this.winnerText.setText(text);
-		this.revalidate();
+		this.winnerText.revalidate();
+	}
+	public int getHandSize()
+	{
+		return this.hand.size();
+	}
+	public void setCardsInHand()
+	{
+		this.cardsInHand.setText(String.format("You have %d cards",this.getHandSize()));
+		this.cardsInHand.revalidate();
+	}
+	public JLabel getCardsInHandLabel()
+	{
+		return this.cardsInHand;
 	}
 
 	public JLabel getWinnerTextLabel()
@@ -104,6 +120,16 @@ public class Player
 		while(!looser.liveCards.isEmpty())
 		{
 			this.addCard(looser.liveCards.pop());
+
+		}
+		while(!this.liveCards.isEmpty())
+		{
+			this.addCard(this.liveCards.pop());
 		}
 	}
+	public void playWar()
+	{
+		this.playCard();this.playCard();this.playCard();this.playCard();
+	}
+
 }

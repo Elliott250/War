@@ -93,6 +93,7 @@ public class Card
 		
 		return false;
 	}
+	
 	/**
 	gets the suit of the card
 	@ return the suit of the card
@@ -101,6 +102,7 @@ public class Card
 	{
 		return this.suit;
 	}
+	
 	/**
 	gets the rank of the card
 	@return the rank of the card
@@ -109,6 +111,7 @@ public class Card
 	{
 		return this.rank;
 	}
+	
 	/**
 	determines of another card is equal to this card
 	@return true if they are equal
@@ -174,6 +177,7 @@ public class Card
 	{
 		this.imagePath = path;
 	}
+	
 	public String getImagePath()
 	{
 		return this.imagePath;
