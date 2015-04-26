@@ -2,7 +2,6 @@ public class War
 {
 	Player player1;
 	Player player2;
-	boolean roundWinner = false;
     boolean war = false;
 
     public War()
@@ -57,10 +56,10 @@ public class War
       this.war = War.determineWar(player1.lookAtTopLiveCard(),player2.lookAtTopLiveCard());
       if(this.war)
       {
-        player1.playWar();
-        player2.playWar();
-        
-        roundWinner = false;
+        player1.setLiveCard(false);
+        player2.setLiveCard(false);	
+      	player1.setWinnerText("WAR!");
+      	player2.setWinnerText("WAR!");
       }
       else if(War.determineWinner(player1.lookAtTopLiveCard(),player2.lookAtTopLiveCard()) <  0)
       {
@@ -69,8 +68,6 @@ public class War
 
         player1.setCardsInHand();
         player2.setCardsInHand();
-        roundWinner = true;
-
       }
       else
       {
@@ -78,24 +75,37 @@ public class War
         player2.takeWinnings(player1);
         player1.setCardsInHand();
         player2.setCardsInHand();
-        roundWinner = true;
-
       }
    }
+
    public void playCard(Player player)
    {
-      if(!player.isEmpty() && !player.hasLiveCard() && !roundWinner)
+      //play face down card during war
+      if(this.war && !player.hasLiveCard())
+  	  {
+  	  	player.playCard();
+  	  	player.setSecretCardImage();
+  	  }	  
+  	  //start of fresh round
+      else if(!player.isEmpty() && !player.hasLiveCard())
       {
         player.playCard();
         player.setLiveCardImage();
       }
-  
-      if(this.bothPlayed())
+      //play first faceup card after war
+      else if(this.war && this.bothPlayed())
       {
-        this.determineWinner();
+      	this.war = false;
+      	player1.setLiveCard(false);
+      	player2.setLiveCard(false);
+      	player.playCard();
+      	player.setLiveCardImage();
       }
+      //determine the winner
+      if(this.bothPlayed() && !this.war)
+      {
+      	this.determineWinner();
+      }
+
   	}
-
-
-
 }

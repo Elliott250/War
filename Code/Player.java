@@ -33,6 +33,14 @@ public class Player
 		this.liveCardImage.setIcon(new ImageIcon(this.lookAtTopLiveCard().getImagePath()));
 		this.liveCardImage.revalidate();
 	}
+
+	public void setSecretCardImage()
+	{
+		ImageIcon image = new ImageIcon("../cardpics/back.jpg");
+
+		this.liveCardImage.setIcon(image);
+		this.liveCardImage.revalidate();
+	}
 	
 	public void removeLiveCardImage()
 	{
@@ -46,8 +54,8 @@ public class Player
 	*/
 	public boolean addCard(Card card)
 	{
-	System.out.println("added card");
-	return hand.add(card);
+		System.out.println("added card");
+		return hand.add(card);
 	}
 
 	public Card playCard()
@@ -64,6 +72,11 @@ public class Player
 	public boolean hasLiveCard()
 	{
 		return this.liveCard;
+	}
+
+	public void setLiveCard(boolean bool)
+	{
+		this.liveCard = bool;
 	}
 
 	public boolean isEmpty()
@@ -129,7 +142,7 @@ public class Player
 	}
 	public void playWar()
 	{
-		this.playCard();this.playCard();this.playCard();this.playCard();
+		this.playCard();this.playCard();
 	}
 
 }
