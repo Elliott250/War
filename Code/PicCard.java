@@ -3,7 +3,7 @@ class PicCard extends Card
 
 	String imagePath;
 	String cardImageDirectory;
-	
+
 	public PicCard(int rank, int suit, String cardImageDirectory)
 	{
 		super(rank,suit);
@@ -27,5 +27,4 @@ class PicCard extends Card
 	{
 		return this.imagePath;
 	}
-
 }
