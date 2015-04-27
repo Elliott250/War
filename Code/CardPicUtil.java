@@ -1,20 +1,18 @@
+/**
+*utility class used to assign card pictures to a PicCard object
+*/
 import java.util.*;
 import java.io.*;
 
 public class CardPicUtil
 {
-
-	public static ArrayList<String> getListOfCardPicsFrom(String pathToDirectory)
-	{
-		File folder = new File(pathToDirectory);
-		File[] listOfFiles = folder.listFiles();
-		ArrayList<String> listOfCardPics = new ArrayList<String>();
-		for(int i = 0; i < listOfFiles.length; ++i)
-			listOfCardPics.add(String.format("%s/%s",pathToDirectory,listOfFiles[i].getName()));
-		
-		return listOfCardPics;
-	}
-
+	/**
+	*generates string that matches a card object with its respective picture
+	*
+	*card picure match example c2.jpg matches a two of clubs
+	*@param card 
+	*@return path to card
+	*/
 	public static String cardToCardPicFormat(Card card)
 	{
 		
@@ -24,6 +22,10 @@ public class CardPicUtil
 		return String.format("%s%s.jpg",rank,suit);
 	}
 	
+	/**
+	* formats rank of card for its respective picture.
+	* @return formatted rank of card 
+	*/
 	private static String formatRank(Card card)
 	{
 		String rank = "";
@@ -48,6 +50,10 @@ public class CardPicUtil
 		return rank;
 	}
 
+	/**
+	* formats suit of card for its respective picture.
+	* @return formatted suit of card 
+	*/
 	private static String formatSuit(Card card)
 	{
 		String suit = "";

@@ -87,6 +87,7 @@ class MyFrame extends JFrame
     public void actionPerformed(ActionEvent e) 
     {
       war.playCard(war.getPlayer1());     
+  
     }
   }
 

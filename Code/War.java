@@ -1,13 +1,14 @@
 public class War
 {
-	Player player1;
-	Player player2;
+	GuiPlayer player1;
+	GuiPlayer player2;
     boolean war = false;
+    boolean roundWinner = false;
 
     public War()
     {
-      player1 = new Player();
-      player2 = new Player();
+      player1 = new GuiPlayer();
+      player2 = new GuiPlayer();
 
       //deal cards to players
       Deck deck = new Deck("../cardpics");
@@ -23,12 +24,12 @@ public class War
 
     }
 
-    public Player getPlayer1()
+    public GuiPlayer getPlayer1()
     {
     	return this.player1;
     }
 
-    public Player getPlayer2()
+    public GuiPlayer getPlayer2()
     {
     	return this.player2;
     }
@@ -68,6 +69,7 @@ public class War
 
         player1.setCardsInHand();
         player2.setCardsInHand();
+        this.roundWinner = true;
       }
       else
       {
@@ -75,11 +77,14 @@ public class War
         player2.takeWinnings(player1);
         player1.setCardsInHand();
         player2.setCardsInHand();
+        this.roundWinner = true;
       }
    }
 
-   public void playCard(Player player)
+   public void playCard(GuiPlayer player)
    {
+
+
       //play face down card during war
       if(this.war && !player.hasLiveCard())
   	  {
@@ -102,10 +107,9 @@ public class War
       	player.setLiveCardImage();
       }
       //determine the winner
-      if(this.bothPlayed() && !this.war)
+      if(this.bothPlayed() && !this.war && !roundWinner)
       {
       	this.determineWinner();
       }
-
   	}
 }

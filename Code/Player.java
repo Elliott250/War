@@ -5,47 +5,14 @@ import javax.swing.*;
 public class Player
 {
 
+	boolean liveCard;
 	Queue<Card> hand = new LinkedList<Card>();
 	Stack<Card> liveCards = new Stack<Card>();
-	boolean liveCard;
-	JLabel liveCardImage;
-	JLabel winnerText;
-	JLabel cardsInHand;
-	boolean winner;
-	int cardCount;
-
- 
 	public Player()
 	{
 		this.liveCard = false;
-		this.winner = false;
-		this.liveCardImage = new JLabel();
 		this.hand = new LinkedList<Card>();
-		this.cardCount = 0;
 		this.liveCards = new Stack<Card>();
-		this.liveCardImage = new JLabel();
-		this.winnerText = new JLabel();
-		this.cardsInHand = new JLabel();
-	}
-
-	public void setLiveCardImage()
-	{
-		this.liveCardImage.setIcon(new ImageIcon(this.lookAtTopLiveCard().getImagePath()));
-		this.liveCardImage.revalidate();
-	}
-
-	public void setSecretCardImage()
-	{
-		ImageIcon image = new ImageIcon("../cardpics/back.jpg");
-
-		this.liveCardImage.setIcon(image);
-		this.liveCardImage.revalidate();
-	}
-	
-	public void removeLiveCardImage()
-	{
-		this.liveCardImage.setIcon(null);
-		this.liveCardImage.revalidate();
 	}
 
 	/**
@@ -58,76 +25,21 @@ public class Player
 		return hand.add(card);
 	}
 
+	/**
+	*removes card from hand and places into live cards
+	*@return card played
+	*/
 	public Card playCard()
 	{
 		this.liveCard = true;
 		return liveCards.push(hand.remove());
 	}
 
-	public void roundOver()
-	{
-		this.liveCard = false;
-	}
-
-	public boolean hasLiveCard()
-	{
-		return this.liveCard;
-	}
-
-	public void setLiveCard(boolean bool)
-	{
-		this.liveCard = bool;
-	}
-
-	public boolean isEmpty()
-	{
-		return (hand.peek() == null);
-	}
-
-	public int getCount()
-	{
-		return cardCount;
-	}
-
-	public void setToWinner()
-	{
-		this.winner = true;
-		this.setWinnerText("You Win this Round");
-	}
-	public void setWinnerText(String text)
-	{
-		this.winnerText.setText(text);
-		this.winnerText.revalidate();
-	}
-	public int getHandSize()
-	{
-		return this.hand.size();
-	}
-	public void setCardsInHand()
-	{
-		this.cardsInHand.setText(String.format("You have %d cards",this.getHandSize()));
-		this.cardsInHand.revalidate();
-	}
-	public JLabel getCardsInHandLabel()
-	{
-		return this.cardsInHand;
-	}
-
-	public JLabel getWinnerTextLabel()
-	{
-		return this.winnerText;  
-	}
-
-	public JLabel getLiveCardImage()
-	{
-		return this.liveCardImage;
-	}
-
-	public Card lookAtTopLiveCard()
-	{
-		return this.liveCards.peek();
-	}
-
+	/**
+	*places all live cards from the current player and the loosing player 
+	*and places them into the winners deck
+	*@param looser the loosing player
+	*/
 	public void takeWinnings(Player looser)
 	{
 		while(!looser.liveCards.isEmpty())
@@ -140,9 +52,58 @@ public class Player
 			this.addCard(this.liveCards.pop());
 		}
 	}
-	public void playWar()
+
+	/**
+	*when the round is over the player no loger has any live cards
+	*set it to false
+	*/
+	public void roundOver()
 	{
-		this.playCard();this.playCard();
+		this.liveCard = false;
 	}
 
+	/**
+	*determins if a player has live cards or not
+	*@return bool true if the player has live cards in play
+	*/
+	public boolean hasLiveCard()
+	{
+		return this.liveCard;
+	}
+
+	/**
+	*sets live card.
+	*@param bool to set live card
+	*/
+	public void setLiveCard(boolean bool)
+	{
+		this.liveCard = bool;
+	}
+
+	/**
+	*determins if a players hand is empty
+	*@return true if hand is empty else false
+	*/
+	public boolean isEmpty()
+	{
+		return (hand.peek() == null);
+	}
+	
+	/**
+	*gets the number of cards in a players hand
+	*@return number of cards in hand.
+	*/
+	public int getHandSize()
+	{
+		return this.hand.size();
+	}
+
+	/**
+	*looks that the top live card
+	*@return card the top live card
+	*/
+	public Card lookAtTopLiveCard()
+	{
+		return this.liveCards.peek();
+	}
 }
